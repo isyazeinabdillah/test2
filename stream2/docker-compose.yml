@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  nginx:
+    build:
+     context: .
+     dockerfile: ./nginx/Dockerfile
+    container_name: web-streaming
+    hostname: web-streaming
+    restart: always
+    privileged: true
+    network_mode: host
+    volumes:
+     - /opt/stream2/nginx/conf/nginx.conf:/opt/nginx/conf/nginx.conf
+     - /opt/stream2/nginx/conf/vhosts:/opt/nginx/conf/vhosts
+     - /etc/localtime:/etc/localtime
+     - /data/log/nginx:/data/log/nginx
+     - /opt/stream2/player:/data/player
+    command: /opt/nginx/sbin/nginx

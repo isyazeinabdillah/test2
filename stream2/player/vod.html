@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Live Streaming</title>
+  <link href="/css/video-js.css" rel="stylesheet">
+</head>
+<body>
+  <video id="video-live" class="video-js vjs-default-skin vjs-big-play-centered vjs-fluid" controls>
+    <source src="http://49.128.186.179:81/vod/vod.mp4/index.m3u8" type="application/x-mpegURL">
+  </video>
+  <script src="/lib/video.js"></script>
+  <script src="/lib/videojs-contrib-hls.js"></script>
+  <script src="/lib/videojs-hlsjs-plugin.v0.3.1.js"></script>
+  <script src="/lib/vjs-quality-picker.v0.0.2.js"></script>
+  <script>
+    var player_options = {
+      autoplay: false,
+    };
+
+    // setup beforeinitialize hook hls.js
+    videojs.Html5Hlsjs.addHook('beforeinitialize', (videojsPlayer, hlsjsInstance) => {
+      // here you can interact with hls.js instance and/or video.js playback is initialized
+    });
+
+    var player = window.player = videojs('video-live',player_options);
+    player.qualityPickerPlugin();
+  </script>
+</body>
+</html>
